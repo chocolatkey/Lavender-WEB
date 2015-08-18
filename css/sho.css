@@ -1,0 +1,794 @@
+/* ===[ The Sho CSS library ]=== */
+
+body,
+html {
+  line-height: inherit;
+  font-weight: 300;
+  font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+  background-size: 100% 100%;
+  text-align: center;
+  background-color: #252525;
+  z-index: -1;
+  background: transparent;
+  /*min-height: 400px;*/
+  /*height: auto !important;*/
+  height: 100%;
+}
+
+.background {
+  padding-top: 0;
+  background: #252525;
+  background: rgb(0,0,0); /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,1) 0%, rgba(37,37,37,1) 80%, rgba(37,37,37,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,1)), color-stop(80%,rgba(37,37,37,1)), color-stop(100%,rgba(37,37,37,1))); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,1) 0%,rgba(37,37,37,1) 80%,rgba(37,37,37,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,1) 0%,rgba(37,37,37,1) 80%,rgba(37,37,37,1) 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,1) 0%,rgba(37,37,37,1) 80%,rgba(37,37,37,1) 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center,  rgba(0,0,0,1) 0%,rgba(37,37,37,1) 80%,rgba(37,37,37,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#141414', endColorstr='#000000',GradientType=0 );
+}
+
+.input-prepend .add-on {
+  font-size: 20px
+}
+
+.yesselect {
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -o-user-select: text;
+  user-select: text;
+}
+
+.noselect {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+::selection {
+  /* Webkit */
+  background: #060;
+  color: #FFF;
+}
+
+::-moz-selection {
+  /* Firefox */
+  background: #060;
+  color: #FFF;
+}
+
+/* ===[ Webkit scrollbar ]=== */
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+/* ===[ Track ]=== */
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+  background-color: #777777;
+}
+
+/* ===[ Handle ]=== */
+
+::-webkit-scrollbar-thumb:vertical,
+::-webkit-scrollbar-thumb:horizontal {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(255,0,0,0.8);
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+::-webkit-scrollbar-thumb:vertical:hover,
+::-webkit-scrollbar-thumb:horizontal:hover {
+  background: rgba(255,0,0,0.9)
+}
+
+/* ===[ End of Webkit scrollbar ]=== */
+
+/* ===[ Custom Bootstrap styles ]=== */
+
+.alert {
+  z-index: 1000
+}
+
+.navbar {
+  border-radius: 0;
+}
+
+.navbar .btn-success, .navbar .btn-warning, .navbar .btn-primary{
+  color:#FFF !important;
+}
+
+/*
+.caret {
+  display: inline
+}*/
+
+a:link,
+a:visited {
+  text-decoration: none
+}
+
+.btn {
+  /*Make the buttons non-selectable*/
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* ===[ Gray button ]=== */
+
+.btn-gray {
+  position: relative;
+  border: 1px solid #494e5a;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-top-color: rgba(0,0,0,0.05);
+  border-bottom-color: rgba(0,0,0,0.35);
+  background: #41485B;
+  background: -moz-linear-gradient(top, #6D7489 0%, #41485B 100%);
+  background: -webkit-linear-gradient(top, #6D7489 0%, #41485B 100%);
+  background: -o-linear-gradient(top, #6D7489 0%, #41485B 100%);
+  background: linear-gradient(to bottom, #6D7489 0%, #41485B 100%);
+  box-shadow: 0 2px 0 rgba(209,221,255,0.2) inset, 0 0 0 1px rgba(255,255,255,0.1) inset, 0 0 10px rgba(32,34,39,0.25) inset, 0 1px 1px rgba(32,34,39,0.1), 0 7px 4px -4px rgba(32,34,39,0.15);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(32,34,39,0.2);
+}
+
+.btn-gray:hover {
+  background: #41485B;
+  background: -moz-linear-gradient(top, #6D7489 0%, #41485B 100%);
+  background: -webkit-linear-gradient(top, #6D7489 0%, #41485B 100%);
+  background: -o-linear-gradient(top, #6D7489 0%, #41485B 100%);
+  background: linear-gradient(to bottom, #6D7489 0%, #41485B 100%);
+  text-decoration: none;
+  box-shadow: 0 2px 0 rgba(209,221,255,0.2) inset,0 0 0 1px rgba(255,255,255,0.1) inset,0 0 10px rgba(255,255,255,0.1) inset,0 1px 1px rgba(32,34,39,0.1),0 7px 4px -4px rgba(32,34,39,0.05);
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(67,56,90,0.3);
+  -webkit-transition: box-shadow 100ms linear, border 100ms linear, color 100ms linear;
+  transition: box-shadow 100ms linear, border 100ms linear, color 100ms linear;
+  -webkit-transition: color 200ms ease-in-out;
+  transition: color 200ms ease-in-out;
+}
+
+.btn-gray:active {
+  border: 1px solid #494e5a;
+  border: 1px solid rgba(32,34,39,0.4);
+  border-top-color: rgba(32,34,39,0.5);
+  background: #636C85;
+  box-shadow: 0 1px 1px rgba(32,34,39,0.15) inset,0 0 5px rgba(32,34,39,0.1) inset,0 1px 0 rgba(255,255,255,1);
+}
+
+/* ===[ Orange Button ]=== */
+
+.btn-orange {
+  position: relative;
+  border: 1px solid #d87d00;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-top-color: rgba(0,0,0,0.05);
+  border-bottom-color: rgba(0,0,0,0.35);
+  background: #FF7300;
+  background: -moz-linear-gradient(top, #FF9600 0%, #FF7300 100%);
+  background: -webkit-linear-gradient(top, #FF9600 0%, #FF7300 100%);
+  background: -o-linear-gradient(top, #FF9600 0%, #FF7300 100%);
+  background: linear-gradient(to bottom, #FF9600 0%, #FF7300 100%);
+  box-shadow: 0 2px 0 rgba(255,236,209,0.3) inset, 0 0 0 1px rgba(255,235,206,0.2) inset, 0 0 10px rgba(205,68,0,0.25) inset, 0 1px 1px rgba(205,68,0,0.1), 0 7px 4px -4px rgba(205,68,0,0.15);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(205,68,0,0.2);
+}
+
+.btn-orange:hover {
+  background: #FF7300;
+  background: -moz-linear-gradient(top, #FF9600 0%, #FF7300 100%);
+  background: -webkit-linear-gradient(top, #FF9600 0%, #FF7300 100%);
+  background: -o-linear-gradient(top, #FF9600 0%, #FF7300 100%);
+  background: linear-gradient(to bottom, #FF9600 0%, #FF7300 100%);
+  text-decoration: none;
+  box-shadow: 0 2px 0 rgba(255,236,209,0.3) inset,0 0 0 1px rgba(255,235,206,0.2) inset,0 0 10px rgba(255,235,206,0.2) inset,0 1px 1px rgba(205,68,0,0.1),0 7px 4px -4px rgba(205,68,0,0.05);
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(67,56,90,0.3);
+  -webkit-transition: box-shadow 100ms linear, border 100ms linear, color 100ms linear;
+  transition: box-shadow 100ms linear, border 100ms linear, color 100ms linear;
+}
+
+.btn-orange:active {
+  border: 1px solid #d87d00;
+  border: 1px solid rgba(205,68,0,0.4);
+  border-top-color: rgba(205,68,0,0.5);
+  background: #FF9600;
+  box-shadow: 0 1px 1px rgba(205,68,0,0.15) inset,0 0 5px rgba(205,68,0,0.1) inset,0 1px 0 rgba(255,255,255,1);
+}
+
+/* ===[ Purple Button ]=== */
+
+.btn-purple {
+  position: relative;
+  border: 1px solid #75689e;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-top-color: rgba(0,0,0,0.05);
+  border-bottom-color: rgba(0,0,0,0.35);
+  background: #5A4E81;
+  background: -moz-linear-gradient(top, #8579AB 0%, #5A4E81 100%);
+  background: -webkit-linear-gradient(top, #8579AB 0%, #5A4E81 100%);
+  background: -o-linear-gradient(top, #8579AB 0%, #5A4E81 100%);
+  background: linear-gradient(to bottom, #8579AB 0%, #5A4E81 100%);
+  box-shadow: 0 2px 0 rgba(213,209,255,0.25) inset, 0 0 0 1px rgba(220,209,255,0.15) inset, 0 0 10px rgba(67,56,90,0.25) inset, 0 1px 1px rgba(67,56,90,0.1), 0 7px 4px -4px rgba(67,56,90,0.15);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(67,56,90,0.2);
+}
+
+.btn-purple:hover {
+  background: #5A4E81;
+  background: -moz-linear-gradient(top, #8579AB 0%, #5A4E81 100%);
+  background: -webkit-linear-gradient(top, #8579AB 0%, #5A4E81 100%);
+  background: -o-linear-gradient(top, #8579AB 0%, #5A4E81 100%);
+  background: linear-gradient(to bottom, #8579AB 0%, #5A4E81 100%);
+  text-decoration: none;
+  box-shadow: 0 2px 0 rgba(213,209,255,0.25) inset, 0 0 0 1px rgba(220,209,255,0.15) inset, 0 0 10px rgba(220,209,255,0.15) inset, 0 1px 1px rgba(67,56,90,0.1), 0 7px 4px -4px rgba(67,56,90,0.05);
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(67,56,90,0.3);
+  -webkit-transition: box-shadow 100ms linear, border 100ms linear, color 100ms linear;
+  transition: box-shadow 100ms linear, border 100ms linear, color 100ms linear;
+}
+
+.btn-purple:active {
+  border: 1px solid #75689e;
+  border: 1px solid rgba(67,56,90,0.4);
+  border-top-color: rgba(67,56,90,0.5);
+  background: #8579AB;
+  box-shadow: 0 1px 1px rgba(67,56,90,0.15) inset, 0 0 5px rgba(67,56,90,0.1) inset, 0 1px 0 rgba(255,255,255,1);
+}
+
+/* ===[ Crystal Button ]=== */
+
+.btn-crystal {
+  position: relative;
+  border: 1px solid #88b5e3;
+  border: 1px solid rgba(72,133,205,0.3);
+  border-top-color: rgba(72,133,205.25);
+  border-bottom-color: rgba(72,133,205,0.5);
+  background: #CFEFFF;
+  background: -moz-linear-gradient(top, #EAF8FF 0%, #CFEFFF 100%);
+  background: -webkit-linear-gradient(top, #EAF8FF 0%, #CFEFFF 100%);
+  background: -o-linear-gradient(top, #EAF8FF 0%, #CFEFFF 100%);
+  background: linear-gradient(to bottom, #EAF8FF 0%, #CFEFFF 100%);
+  box-shadow: 0 2px 0 rgba(240,250,255,1) inset, 0 0 10px rgba(0,97,197,0.12) inset, 0 1px 1px rgba(0,97,197,0.1), 0 7px 4px -4px rgba(0,97,197,0.15);
+  color: #3E709C;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+}
+
+.btn-crystal:hover {
+  background: #CFEFFF;
+  background: -moz-linear-gradient(top, #EAF8FF 0%, #CFEFFF 100%);
+  background: -webkit-linear-gradient(top, #EAF8FF 0%, #CFEFFF 100%);
+  background: -o-linear-gradient(top, #EAF8FF 0%, #CFEFFF 100%);
+  background: linear-gradient(to bottom, #EAF8FF 0%, #CFEFFF 100%);
+  text-decoration: none;
+  box-shadow: 0 2px 0 rgba(240,250,255,1) inset, 0 0 0 1px rgba(255,255,255,0.6) inset, 0 0 10px rgba(0,97,197,0.12) inset, 0 1px 1px rgba(0,97,197,0.1), 0 7px 4px -4px rgba(0,97,197,0.2);
+  color: #3E709C;
+  text-shadow: 0 1px 1px rgba(0,97,197,0.3);
+  -webkit-transition: box-shadow 100ms linear, border 100ms linear, color 100ms linear;
+  transition: box-shadow 100ms linear, border 100ms linear, color 100ms linear;
+}
+
+.btn-crystal:active {
+  border: 1px solid #88b5e3;
+  border: 1px solid rgba(0,97,197,0.4);
+  border-top-color: rgba(0,97,197,0.5);
+  background: #659DCE;
+  box-shadow: 0 1px 1px rgba(0,97,197,0.15) inset, 0 0 5px rgba(0,97,197,0.1) inset, 0 1px 0 rgba(255,255,255,1);
+}
+
+/* END of all custom bootstrap buttons
+   ================================================== */
+   
+
+.content {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&1+0,0.8+100 */
+  background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0.8))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0.8) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0.8) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0.8) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0.8) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ccffffff',GradientType=0 ); /* IE6-9 */
+  position: relative;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin: 25px 20px 50px;
+  padding: 20px;
+  /*For Mobile so that there is no overflow*/
+  word-break: break-all;
+
+  max-width: 2000px;
+}
+
+@media (min-width: 2008px) { 
+    .content {
+      margin-left: auto;
+      margin-right: auto;
+    }
+}
+
+.left {
+  text-align: left
+}
+
+.full {
+  width: 100%
+}
+
+.input-large {
+  width: 100%;
+  height: auto!important;
+}
+
+form {
+  margin: 0
+}
+
+@media (min-width: 768px) { 
+    .sbox {
+      display: block;
+      width: 280px;
+      padding: 20px 15px;
+      top: 48%;
+      left: 50%;
+      margin-top: -200px;
+      margin-left: -155px;
+      position: absolute;
+    }
+}
+/*@media (min-width: 1080px) { 
+    .sbox {
+      width: 30%;
+	  left: 10%;
+      right: 10%;
+	  margin: auto;
+	  margin-top: -200px;
+	  min-height: 350px;
+	  height: 20%;
+    }
+}*/
+@media (max-width: 767px) { 
+    html {
+      height: auto;
+    }
+}
+
+@media (max-width: 480px) { 
+    .sbox {
+      width: auto;
+      padding: 10px;
+      margin: 20px 15px 20px;
+      top: 10%;
+      left: 10%;
+      right: 10%;
+      margin-top: auto;
+      /*margin-left: -125px;*/
+      position: absolute;
+      min-height: 200px;
+    }
+	.background {
+	  background: #FFF !important;
+	}
+    .title {
+      color: #000 !important;
+    }
+}
+
+@media (max-height: 400px) { 
+    .sbox {
+      top: 5%!important;
+      margin-top: 0;
+	  margin-bottom: 5px;
+      /*margin-left: auto;*/
+	  width: auto;
+	  /*position: absolute;*/
+    }
+	html {
+      height: auto;
+    }
+	.background {
+	  background: #FFF !important;
+	}
+}
+
+.fadein {
+  opacity: 0; /* make things invisible upon start */
+  -webkit-animation: fadeIn ease-in 1; /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+  -moz-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
+  -webkit-animation-fill-mode: forwards; /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  /*Add these for delay*/
+  /*-webkit-animation-delay: 0.7s;;
+  -moz-animation-delay: 0.7s;
+  animation-delay: 0.7s;*/
+}
+
+.title {
+  font-family: "Lucida Console", Monaco, monospace;
+  color: #FFF;
+  -webkit-animation: shade 3s;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation: shade 3s;
+  -moz-animation-iteration-count: infinite;
+  -o-animation: shade 3s;
+  -o-animation-iteration-count: infinite;
+}
+
+table,
+th,
+td {
+  border: 1px solid !important
+}
+
+/* ===[ Footer and it's components ]=== */
+
+.footer {
+  left: 0;
+  position: fixed;
+  background: #C00;
+  text-align: center;
+  border-top: 1px solid #900;
+  box-shadow: 0 0 10px #ccc;
+  -moz-box-shadow: 0 0 10px #ccc;
+  -webkit-box-shadow: 0 0 10px #ccc;
+  -o-box-shadow: 0 0 10px #ccc;
+  -box-shadow: 0 0 10px #ccc;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  bottom: 0;
+  padding: 5px;
+  margin: auto;
+  color: #fff;
+  border-top: 1px solid #000;
+}
+
+.ftop {
+  bottom: auto!important;
+  top: 0!important;
+  padding: 30px;
+  z-index: 99;
+}
+
+/*.dropdown-menu {
+  background: rgb(98,125,77);
+  background: -moz-linear-gradient(top,  rgba(98,125,77,1) 0%, rgba(31,59,8,1) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(98,125,77,1)), color-stop(100%,rgba(31,59,8,1)));
+  background: -webkit-linear-gradient(top,  rgba(98,125,77,1) 0%,rgba(31,59,8,1) 100%);
+  background: -o-linear-gradient(top,  rgba(98,125,77,1) 0%,rgba(31,59,8,1) 100%);
+  background: -ms-linear-gradient(top,  rgba(98,125,77,1) 0%,rgba(31,59,8,1) 100%);
+  background: linear-gradient(to bottom,  rgba(98,125,77,1) 0%,rgba(31,59,8,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#627d4d', endColorstr='#1f3b08',GradientType=0 );
+}
+
+.dropdown-menu>li>a {
+  color: #FFF
+}*/
+
+/* ===[ Bottom text ]=== */
+
+.bottom {
+  bottom: 0!important;
+  color: #CCC;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  left: 0;
+}
+
+/* ===[ Internet Explorer bar styles ]=== */
+
+#ie {
+  background: #C00;
+  text-align: center;
+  border-bottom: 1px solid #900;
+  color: #fff;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 30px;
+  margin: auto;
+  z-index: 50;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  box-shadow: 0 0 5px #ccc;
+  -moz-box-shadow: 0 0 5px #ccc;
+  -webkit-box-shadow: 0 0 5px #ccc;
+  -o-box-shadow: 0 0 5px #ccc;
+  -box-shadow: 0 0 5px #ccc;
+  border-bottom: 1px solid #000;
+}
+
+.xhide {
+  right: 20px;
+  position: absolute;
+  cursor: pointer;
+  color: #0CF;
+  font-size: large;
+}
+
+.xhide:hover {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+input[type="checkbox"] {
+  margin: -2px 0 0
+}
+
+.input-prepend {
+  width: 222px
+}
+
+.ml0 {
+  margin-left: -10px!important;
+  padding-left: 0!important;
+  left: 0!important;
+}
+
+/* "Led Lights" effects and sprite alignement
+   ================================================== */
+
+.leds {
+  width: 78px;
+  height: 68px;
+  overflow: hidden;
+  position: absolute;
+  right: 30px;
+  top: 5px;
+}
+
+.leds .led {
+  width: 39px;
+  height: 68px;
+  background: url(/images/s/leds.png) no-repeat;
+}
+
+.leds .led.green {
+  background-position: bottom left;
+  float: left;
+}
+
+.leds .led.green.active {
+  background-position: top left
+}
+
+.leds .led.green.active.blink {
+  background-position: top left;
+  -webkit-animation: blink 3s;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation: blink 3s;
+  -moz-animation-iteration-count: infinite;
+  -o-animation: blink 3s;
+  -o-animation-iteration-count: infinite;
+}
+
+.leds .led.red {
+  background-position: top right;
+  float: right;
+}
+
+.leds .led.red.active {
+  background-position: bottom right
+}
+
+.leds .led.red.active.blink {
+  background-position: bottom right;
+  -webkit-animation: blink 3s;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation: blink 3s;
+  -moz-animation-iteration-count: infinite;
+  -o-animation: blink 3s;
+  -o-animation-iteration-count: infinite;
+}
+
+@media (max-width: 950px) { 
+    .leds {
+      display: none
+    }
+}
+
+/* Slide open and close */
+.slidey {
+    height:0px !important;
+    -webkit-transition:height, 0.5s linear;
+    -moz-transition: height, 0.5s linear;
+    -ms-transition: height, 0.5s linear;
+    -o-transition: height, 0.5s linear;
+    transition: height, 0.5s linear;
+}
+.slidey.open {
+    height:auto !important;
+    -webkit-transition:height, 0.5s linear;
+    -moz-transition: height, 0.5s linear;
+    -ms-transition: height, 0.5s linear;
+    -o-transition: height, 0.5s linear;
+    transition: height, 0.5s linear;
+}
+
+/* Spin class from font awesome */
+.i-spin {
+  -webkit-animation: i-spin 2s infinite linear;
+  animation: i-spin 2s infinite linear;
+}
+@-webkit-keyframes i-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes i-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+/* ===[ Fading in effect ]=== */
+
+@-webkit-keyframes fadeIn { 
+    from {
+      opacity: 0
+    }
+
+    to {
+      opacity: 1
+    }
+}
+
+@-moz-keyframes fadeIn { 
+    from {
+      opacity: 0
+    }
+
+    to {
+      opacity: 1
+    }
+}
+
+@keyframes fadeIn { 
+    from {
+      opacity: 0
+    }
+
+    to {
+      opacity: 1
+    }
+}
+
+@-o-keyframes fadeIn { 
+    from {
+      opacity: 0
+    }
+
+    to {
+      opacity: 1
+    }
+}
+
+/* ===[ Blinking Fade Effect ]=== */
+
+@-webkit-keyframes blink { 
+    0% {
+      opacity: 1
+    }
+
+    50% {
+      opacity: 0
+    }
+
+    100% {
+      opacity: 1
+    }
+}
+
+@-moz-keyframes blink { 
+    0% {
+      opacity: 1
+    }
+
+    50% {
+      opacity: 0
+    }
+
+    100% {
+      opacity: 1
+    }
+}
+
+@-o-keyframes blink { 
+    0% {
+      opacity: 1
+    }
+
+    50% {
+      opacity: 0
+    }
+
+    100% {
+      opacity: 1
+    }
+}
+
+/* ===[ Fade,color effect for title ]=== */
+
+@-webkit-keyframes shade { 
+    0% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.7;
+    }
+
+    100% {
+      opacity: 1;
+    }
+}
+
+@-moz-keyframes shade { 
+    0% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.7;
+    }
+
+    100% {
+      opacity: 1;
+    }
+}
+
+@-o-keyframes shade { 
+    0% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.7;
+    }
+
+    100% {
+      opacity: 1;
+    }
+}
+
+.twos {
+  -webkit-animation-duration: 2s!important;
+  -moz-animation-duration: 2s!important;
+  -o-animation-duration: 2s!important;
+  animation-duration: 2s!important;
+}

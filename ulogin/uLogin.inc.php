@@ -183,7 +183,7 @@ class uLogin
 	// if all of the following conditions are met:
 	// - specified user has the specified password
 	// - IP or user has not been blocked
-	private function Authenticate3($uid, $password)
+	public function Authenticate3($uid, $password)
 	{
 		if ($uid == false)
 		{

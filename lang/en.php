@@ -50,6 +50,9 @@ defined('__CC__') or die('Restricted access'); $lang = [
  'logged_out' => 'Logged out',
  'account_create_error' => 'Failed creating new account (This account might already exist)',
  'account_create_success' => 'Account created',
+ 'password_change_error' => 'Failed changing account password',
+ 'password_change_error_oldpass' => 'Failed changing account password: Incorrect old password',
+ 'password_change_success' => 'Password changed',
  'invalid_nounce' => 'Invalid Nounce',
  
  //User menu
@@ -67,6 +70,8 @@ defined('__CC__') or die('Restricted access'); $lang = [
  'old_password' => 'Old password',
  'new_password' => 'New password',
  'new_password_confirm' => 'Confirm new password',
+ 'new_password_match' => 'Match',
+ 'new_password_nomatch' => 'Not Matching',
  'update_password' => 'Update Password',
  
  //Create Account Modal

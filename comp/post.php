@@ -1,8 +1,5 @@
 <?php defined('__CC__') or die('Restricted access');
 
-//Functions
-require(dirname(__FILE__)."/comp/functions.php");
-
 $ip = cleanstring($_SERVER['REMOTE_ADDR']);
 $time = time();
 $id = cleanstring($_POST['id']);

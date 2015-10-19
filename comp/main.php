@@ -1,9 +1,8 @@
 <?php
 defined('__CC__') or die('Restricted access');
 $username = $_SESSION['username'];
-require_once(dirname(__FILE__)."/header.php");
-
 error_reporting(E_ALL ^ E_NOTICE);
+require_once(dirname(__FILE__)."/header.php");//HTML head
 ?>
 <script>
 function hideie() {
@@ -24,7 +23,7 @@ function hideie() {
     <strong>Welcome!</strong> You are logged in, <?php echo($username); ?>. </div>
   <?php
 }
-require(dirname(__FILE__)."/functions.php");//Functions
+//require(dirname(__FILE__)."/functions.php");//Functions
 echo ($msg);//Any messages
 require(dirname(__FILE__)."/pages/".$q.".php");//Get content based on page
 ?>

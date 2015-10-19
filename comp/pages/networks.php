@@ -47,7 +47,7 @@ foreach($networks as $network){
     }
     echo'
       <tr>
-        <td><input type="checkbox" name="scb" value="'.$network['name'].'" /></td>
+        <td><input type="checkbox" name="scb" id="c'.$network['name'].'" value="'.$network['name'].'" /><label for="c'.$network['name'].'"></label></td>
         <td>'.$network['name'].'</td>
         <td><img src="/img/icons/'.$pic.'.png" alt="'.$alt.'"/></td>
         <td>'.$network['accounts'].'</td>

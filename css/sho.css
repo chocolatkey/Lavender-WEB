@@ -336,6 +336,34 @@ form {
   margin: 0
 }
 
+/* Custom Checkbox/Radio Buttons*/
+input[type="checkbox"] {
+  display: none;
+}
+label {
+  cursor: pointer;
+}
+input[type="checkbox"] + label:before {
+  border: 1px solid #545454;
+  content: "\00a0";
+  display: inline-block;
+  font: 16px/1em sans-serif;
+  height: 16px;
+  margin: 0 .25em 0 0;
+  padding:0;
+  vertical-align: top;
+  width: 16px;
+}
+input[type="checkbox"]:checked + label:before {
+  background: #000;
+  color: #FFF;
+  content: "\2713";
+  text-align: center;
+}
+input[type="checkbox"]:checked + label:after {
+  font-weight: bold;
+}
+
 @media (min-width: 768px) { 
     .sbox {
       display: block;

@@ -61,8 +61,8 @@ defined('__CC__') or die('Restricted access');
     <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo $lang["close"];?>"><span aria-hidden="true">&times;</span></button>
     <h3 id="modal-title" class="noselect"><?php echo $lang["my_account"];?></h3>
   </div>
-  <form method="POST" id="chpass">
-    <input type="hidden" name="action" value="create">
+  <form method="POST">
+    <input type="hidden" name="action" value="chpass">
     <div class="modal-body noselect" style="text-align:left">
         <h4><?php echo $lang["networks"];?></h4>
         <?php if ($username==$admin){ ?>
@@ -77,13 +77,25 @@ defined('__CC__') or die('Restricted access');
         <h4><?php echo $lang["change_password"];?></h4>
         <input type="password" name="opwd" placeholder="<?php echo $lang["old_password"];?>" class="input-large form-control" required>
         <br>
-        <input type="password" name="npwd" placeholder="<?php echo $lang["new_password"];?>" class="input-large form-control" required>
+        <input type="password" name="npwd" id="pass" placeholder="<?php echo $lang["new_password"];?>" class="input-large form-control" required>
         <br>
-        <input type="password" name="ncpwd" placeholder="<?php echo $lang["new_password_confirm"];?>" class="input-large form-control" required>
+        <input type="password" name="cpwd" id="confirmpass" placeholder="<?php echo $lang["new_password_confirm"];?>" class="input-large form-control" required>
+        
+        <script>
+        $('#confirmpass, #pass').on('keyup', function () {
+            if ($(this).val() == $('#pass').val() && $(this).val() == $('#confirmpass').val()) {
+                $("#updatepass").prop("disabled",false);
+                $('#confirmpass').removeClass('has-error');
+            } else{
+                $("#updatepass").prop("disabled",true);
+                $('#confirmpass').addClass('has-error');
+            }
+        });
+        </script>
       </div>
     <div class="modal-footer noselect">
       <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $lang["close"];?></button>
-      <button class="btn btn-primary" type="submit"><?php echo $lang["update_password"];?></button>
+      <button class="btn btn-primary" id="updatepass" type="submit"><?php echo $lang["update_password"];?></button>
     </div>
   </form>
 </div>
@@ -98,7 +110,7 @@ defined('__CC__') or die('Restricted access');
     <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo $lang["close"];?>"><span aria-hidden="true">&times;</span></button>
     <h3 id="modal-title" class="noselect"><?php echo $lang["create_account"];?></h3>
   </div>
-  <form method="POST" id="create">
+  <form method="POST">
     <input type="hidden" name="action" value="create">
     <div class="modal-body noselect" style="text-align:left">
         <input type="text" name="user" placeholder="<?php echo $lang["username"];?>" class="input-large form-control" required>

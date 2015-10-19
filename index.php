@@ -8,8 +8,11 @@ require_once(dirname(__FILE__)."/config.php");
 //Lanuage file
 require_once(dirname(__FILE__)."/lang/".$mconfig["lang"].".php");
 
+//Functions
+require(dirname(__FILE__)."/comp/functions.php");
+
 //Post from client
-$header = $_SERVER['HTTP_USER_AGENT'];//TODO: Not sure if injection-proof
+$header = cleanstring($_SERVER['HTTP_USER_AGENT']); //TODO: Not sure if 100% injection-proof
 if($header == "0x1" | $header == "1x0" | $header == "1x1") {
 	require(dirname(__FILE__)."/comp/post.php");
     die();//nothing more
@@ -45,7 +48,7 @@ function appLogin($uid, $username, $ulogin){
 
 	if (isset($_SESSION['appRememberMeRequested']) && ($_SESSION['appRememberMeRequested'] === true))
 	{
-		// Enable remember-me
+		// Enable remember me
 		if ( !$ulogin->SetAutologin($username, true))
 			echo "cannot enable autologin<br>";
 
@@ -108,35 +111,45 @@ $ulogin = new uLogin('appLogin', 'appLoginFail');
 // we are logged in or not.
 
 if (isAppLoggedIn()){
-	if ($action=='delete')	{	// We've been requested to delete the account
-        if ($_SESSION['username']==$admin){ //only if admin
-            $msg = "<div class='alert alert-danger animated pulse'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["admin_nodelete"]."</div>";
-        } else{
+	if ($action=='delete'){	// Delete the account
+        if ($_SESSION['username']==$admin) { //only if admin
+            $msg = "<div class='alert alert-danger animated pulse' id='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["admin_nodelete"]."</div>";
+        } else {
             // Delete account
-            if ( !$ulogin->DeleteUser( $_SESSION['uid'] ) )
-                $msg = "<div class='alert alert-danger animated pulse'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["account_delete_error"]."</div>";
-            else
-                $msg = "<div class='alert alert-success animated pulse'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["account_delete_success"]."</div>";
-
+            if ( !$ulogin->DeleteUser( $_SESSION['uid'] ) ) {
+                $msg = "<div class='alert alert-danger animated pulse' id='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["account_delete_error"]."</div>";
+            } else {
+                $msg = "<div class='alert alert-success animated pulse' id='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["account_delete_success"]."</div>";
+            }
             // Logout
             appLogout();
         }
-	} else if ($action == 'logout'){ // We've been requested to log out
+	} else if ($action == 'logout'){ // Log Out
 		// Logout
 		appLogout();        
-		$msg = "<div class='alert alert-info animated pulse'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["logged_out"]."</div>";
-	} else if ($action=='create'){	// We were requested to try to create a new acount.
-        if ($_SESSION['username']==$admin){ //only if admin
+		$msg = "<div class='alert alert-info animated pulse' id='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["logged_out"]."</div>";
+	} else if ($action=='create') {	// Create a new acount.
+        if ($_SESSION['username']==$admin) { //only if admin
             // create new account
-            if ( !$ulogin->CreateUser( $_POST['user'],  $_POST['pwd']) )
-                $msg = "<div class='alert alert-danger animated pulse'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["account_create_error"]."</div>";
-            else
-                $msg = "<div class='alert alert-success animated pulse'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["account_create_success"]."</div>";
+            if ( !$ulogin->CreateUser( $_POST['user'],  $_POST['pwd']) ) {
+                $msg = "<div class='alert alert-danger animated pulse' id='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["account_create_error"]."</div>";
+            } else {
+                $msg = "<div class='alert alert-success animated pulse' id='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["account_create_success"]."</div>";
             }
-	}
+        }
+	} else if ($action=='chpass') {	// Change user password
+        if (($_SESSION['uid'] == $ulogin->Authenticate3($_SESSION['uid'], $_POST['opwd'])) || ($_SESSION['username']==$admin)) {// Admin power overrides need to know previous password
+            if ( !$ulogin->SetPassword($_SESSION['uid'], $_POST['npwd']) ) {
+                $msg = "<div class='alert alert-danger animated pulse' id='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["password_change_error"]."<   /div>";
+            } else {
+                $msg = "<div class='alert alert-success animated pulse' id='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["password_change_success"]."</div>";
+            }
+        } else {
+            $msg = "<div class='alert alert-danger animated pulse' id='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["password_change_error_oldpass"]."</div>";
+        }
+    }
 } else {
-	// We've been requested to log in
-	if ($action=='login') {
+    if ($action=='login') { //Log In
 		// Here we verify the nonce, so that only users can try to log in
 		// to whom we've actually shown a login page. The first parameter
 		// of Nonce::Verify needs to correspond to the parameter that we
@@ -146,23 +159,23 @@ if (isAppLoggedIn()){
 			// We store it in the session if the user wants to be remembered. This is because
 			// some auth backends redirect the user and we will need it after the user
 			// arrives back.
-      if (isset($_POST['autologin']))
-        $_SESSION['appRememberMeRequested'] = true;
-      else
-        unset($_SESSION['appRememberMeRequested']);
-
-			// This is the line where we actually try to authenticate against some kind
-			// of user database. Note that depending on the auth backend, this function might
-			// redirect the user to a different page, in which case it does not return.
-			$ulogin->Authenticate($_POST['user'],  $_POST['pwd']);
-			if ($ulogin->IsAuthSuccess()){
-				// Since we have specified callback functions to uLogin,
-				// we don't have to do anything here.
-			}
-		}else
-			$msg = "<div class='alert alert-warning animated pulse'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["invalid_nounce"]."</div>";
-
-	}/* else if ($action=='autologin'){	// We were requested to use the remember-me function for logging in.
+            if (isset($_POST['autologin'])){
+                $_SESSION['appRememberMeRequested'] = true;
+            } else {
+                unset($_SESSION['appRememberMeRequested']);
+            }
+            // This is the line where we actually try to authenticate against some kind
+            // of user database. Note that depending on the auth backend, this function might
+            // redirect the user to a different page, in which case it does not return.
+            $ulogin->Authenticate($_POST['user'],  $_POST['pwd']);
+            if ($ulogin->IsAuthSuccess()){
+                // Since we have specified callback functions to uLogin,
+                // we don't have to do anything here.
+            }
+        } else {
+            $msg = "<div class='alert alert-warning animated pulse' id='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["invalid_nounce"]."</div>";
+        }
+    } else if ($action=='autologin'){	// We were requested to use the remember-me function for logging in.
 		// Note, there is no username or password for autologin ('remember me')
 		$ulogin->Autologin();
 		if (!$ulogin->IsAuthSuccess())
@@ -170,14 +183,9 @@ if (isAppLoggedIn()){
 		else
 			$msg = "<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button>Autologon ok</div>";
 
-	} else if ($action=='create'){	// We were requested to try to create a new acount.
-		// New account
-		if ( !$ulogin->CreateUser( $_POST['user'],  $_POST['pwd']) )
-			$msg = "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button>Account creation failure</div>";
-		else
-			$msg = "<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button>Account created</div>";
-	}*///REMOVED TO PREVENT ACCOUNTS FROM BEING CREATED!!
+	}
 }
+
 
 // Now we handle the presentation, based on whether we are logged in or not.
 // Nothing fancy, except where we create the 'login'-nonce towards the end
@@ -192,15 +200,22 @@ header('Content-Type: text/html; charset=UTF-8');
 
 //Main Page content
 if(isset($_GET['q'])) {
-	$q=$_GET['q'];
+	$q=cleanstring($_GET['q']);
 }
 if (isAppLoggedIn()){
 	if(!isset($_GET['q'])) {
-		$q = "dashboard";
+	  $q = "dashboard";
     }
     require_once(dirname(__FILE__)."/comp/pages.php");
-    $pname = $pages[$q];//set page title
-    require(dirname(__FILE__)."/comp/main.php");
+    if(!isset($pages[$q])){
+        $username = $_SESSION['username'];
+        require_once(dirname(__FILE__)."/comp/header.php");
+        require_once(dirname(__FILE__)."/comp/nav.php");//navigation menu
+        echo("<h1 class='title noselect'>Page does not exist!</h1>");
+    } else {
+        $pname = $pages[$q];//set page title
+        require(dirname(__FILE__)."/comp/main.php");
+    }
 } else {
     $pname = $lang['login'];//set page title
 	require_once(dirname(__FILE__)."/comp/header.php");
@@ -221,8 +236,9 @@ if (isAppLoggedIn()){
 	}
 </style>
 <center>
-<div class="content sbox noselect animated bounceInDown"> <img src="./img/logo.png" alt="Lavender Logo" style="margin-bottom: 20px; height: 50px; width: auto;">
-  <div id="alert"><?php echo ($msg);?></div>
+<div class="content sbox noselect animated bounceInDown">
+  <img src="./img/logo.png" alt="Lavender Logo" style="margin-bottom: 20px; height: 50px; width: auto;">
+  <?php echo ($msg);?>
   <div class="alert alert-danger animated tada" id="errdiv" style="display:none"><span id="errmsg"></span>
     <button type='button' class='close' data-dismiss='alert'>&times;</button>
   </div>
@@ -235,8 +251,8 @@ if (isAppLoggedIn()){
       <input type="password" name="pwd" placeholder="<?php echo $lang["password"];?>" class="input form-control" required>
     </div>
     <br>
-    <?php echo $lang["remember_me"];?>&nbsp;&nbsp;
-    <input type="checkbox" name="autologin" value="1">
+    <input type="checkbox" name="autologin" id="al" value="1">
+    <label for="al"><?php echo $lang["remember_me"];?></label>
     <select name="action" style="display:none">
       <option>login</option>
       <option>autologin</option>
@@ -247,9 +263,7 @@ if (isAppLoggedIn()){
     <input type="submit" class="btn btn-gray btn-large" value="<?php echo $lang["login"];?>" style="width:150px; margin-top:20px;">
   </form>
 </div>
-<div class="bottom noselect"><a style="float: left;" href="/">&copy; Chocolatkey (Todo get name from db) 2013-2015</a><a style="float: right; cursor: pointer;" href="http://chocolatkey.com">Lavender C&amp;C</a></div>
-<?php
-/* if($emsg != null){echo ($emsg);} */?>
+<div class="bottom noselect"><a style="float: left;" href="/">&copy; <?php echo $mconfig["branding"]; ?></a><a style="float: right; cursor: pointer;" href="https://github.com/chocolatkey/Lavender-WEB">Lavender Web</a></div>
 <?php } ?>
 </body>
 </html>

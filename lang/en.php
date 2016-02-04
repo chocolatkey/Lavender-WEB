@@ -1,8 +1,8 @@
 <?php
 /*English (en) language file for Lavender web*/
 defined('__CC__') or die('Restricted access'); $lang = [
- //Language name
- 'this' => 'English',
+ 'this' => 'English', //Language name
+ 'author' => 'Henry Stark', //Language file author(s)
    
  //Keywords
  'ok' => 'OK',
@@ -15,6 +15,9 @@ defined('__CC__') or die('Restricted access'); $lang = [
  'add' => 'Add',
  'remove' => 'Remove',
  'client' => 'Client',
+ 'name' => 'Name',
+ 'status' => 'Status',
+ '404' => 'Page not found',
  
  'page' => 'Page',
  'create' => 'Create',
@@ -22,7 +25,12 @@ defined('__CC__') or die('Restricted access'); $lang = [
  'edit' => 'Edit',
  'account' => 'Account',
  'accounts' => 'Accounts',
+ 'associated_accounts' => 'Associated accounts',
  'manage' => 'Manage',
+ 'export_csv' => 'Export CSV',
+ 'rows' => 'row(s)',
+ 'rows_selected' => 'row(s) selected',
+ 'columns' => 'column(s)',
  
  'enable_disable' => 'Enable/Disable',
  'enable' => 'Enable',
@@ -30,7 +38,14 @@ defined('__CC__') or die('Restricted access'); $lang = [
  'enabled' => 'Enabled',
  'disabled' => 'Disabled',
  'details' => 'Details',
- 'actions_selected' => 'Actions for selected',
+ 'actions_selected' => 'Action for selected item(s)',
+ 
+ 'confirm_deleted_selected' => 'Really delete selected item(s)?',
+  'confirm_deleted_myaccount' => 'Really delete your account?',
+ 'x_accounts_deleted' => 'account(s) deleted',
+ 'x_accounts_updated' => 'account(s) updated',
+ 'x_networks_deleted' => 'network(s) deleted',
+ 'x_networks_updated' => 'network(s) updated',
  
  //Secure toggle
  'secure' => 'Secure',
@@ -40,7 +55,7 @@ defined('__CC__') or die('Restricted access'); $lang = [
  'login' => 'Login',
  'username' => 'Username',
  'password' => 'Password',
- 'remember_me' => 'Remember me',
+ 'remember_me_30_days' => 'Remember me (30 days)',
  
  //Login Messages
  'login_error' => 'Login Error!',
@@ -54,16 +69,18 @@ defined('__CC__') or die('Restricted access'); $lang = [
  'password_change_error_oldpass' => 'Failed changing account password: Incorrect old password',
  'password_change_success' => 'Password changed',
  'invalid_nounce' => 'Invalid Nounce',
+ 'date_created' => 'Date created',
+ 'last_login' => 'Last login',
  
  //User menu
  'manage_accounts' => 'Manage Accounts',
  'create_account' => 'Create Account',
- 'delete_account' => 'Delete Account',
+ 'delete_my_account' => 'Delete My Account',
  'my_account' => 'My Account',
  'refresh_page' => 'Refresh Page',
  'logout' => 'Log out',
  
- //Account Modal
+ //Account
  'networks' => 'Networks',
  'network' => 'Network',
  'change_password' => 'Change Password',
@@ -74,8 +91,19 @@ defined('__CC__') or die('Restricted access'); $lang = [
  'new_password_nomatch' => 'Not Matching',
  'update_password' => 'Update Password',
  
- //Create Account Modal
+ //Password strength
+ 'weak' => 'Weak',
+ 'fair' => 'Fair',
+ 'medium' => 'Medium',
+ 'strong' => 'Strong',
+ 'very_strong' => 'Very Strong',
+ 
+ //Modal
  'create_user' => 'Create User',
+ 'create_network' => 'Create Network',
+ 
+ 'network_name' => 'Network name',
+ 'edit_permissions' => 'Edit permissions',
  
  //Main menu
  'dashboard' => 'Dashboard',

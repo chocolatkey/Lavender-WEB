@@ -10,11 +10,21 @@ $footer_networks = $database->select("networks", [
 <form method="POST" id="refresh"><input type="hidden" name="action" value="refresh"></form>
 <form method="POST" id="logout"><input type="hidden" name="action" value="logout"></form>
 <!-- Footer -->
-<div class="footer noselect"> <a href="http://www.chocolatkey.com" title="Go to the Chocolatkey Website" style="padding-top: 7px; color: #db7fdb;" class="pull-left">&copy; Chocolatkey</a>
+<div class="footer noselect"> <span style="padding-top: 7px; color: #db7fdb;" class="pull-left">&copy; <?php echo $mconfig["branding"]; ?></span>
   <?php if (!$_SERVER['HTTPS']){?>
-  <a class="btn btn-warning btn-sm pull-right" id="loadbutton" href="https://<?php echo $page; ?>"><i class="glyphicon glyphicon-exclamation-sign" id="loadicon"></i> <?php echo $lang["insecure"];?></a>
+  <a class="btn btn-danger btn-sm pull-right" id="loadbutton" href="https://<?php echo $page; ?>"><i class="fa fa-exclamation-triangle" id="loadicon"></i> <?php echo $lang["insecure"];?></a>
+  <style>
+  #loadbutton {
+    -webkit-animation: shade 3s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation: shade 3s;
+    -moz-animation-iteration-count: infinite;
+    -o-animation: shade 3s;
+    -o-animation-iteration-count: infinite;
+  }
+  </style>
   <?php }else{?>
-  <a class="btn btn-success btn-sm pull-right" id="loadbutton" href="http://<?php echo $page; ?>"><i class="glyphicon glyphicon-lock" id="loadicon"></i> SSL</a>
+  <a class="btn btn-success btn-sm pull-right" id="loadbutton" href="http://<?php echo $page; ?>"><i class="fa fa-lock" id="loadicon"></i> SSL</a>
   <?php }?>
   <form method="POST" id="network">
     <select class="form-control pull-right" name="nsel" id="nsel" style="margin-right: 5px; width: auto; height: 30px;">
@@ -25,31 +35,20 @@ foreach($footer_networks as $network){//TODO: set selected and form submit
 
     </select>
   </form>
-  <span class="pull-right" style="margin-right: 10px; margin-top: 7px;"><?php echo $lang["network"];?>:</span>
+  <span class="pull-right hidden-xs" style="margin-right: 10px; margin-top: 7px;"><?php echo $lang["network"];?>:</span>
 </div>
 <script>
 //Submit form
 function form(form){document.getElementById(form).submit();}
-<?php if ($username!=$admin){ //create if admin, delete if not ?>
-//Delete account
-function del(){
-    if (confirm("Do you really want to delete your account?")){
-        document.getElementById('delete').submit();
-        alert("Account deleted")
-    }
-    else{
-        alert("Account not deleted");
-    }
-}<?php } ?>
 
 //Security button load spinner
 $('#loadbutton').click(function() {
     $('#loadicon').removeClass();
-    $('#loadicon').addClass("loadicon glyphicon glyphicon-refresh i-spin");
+    $('#loadicon').addClass("fa fa-spinner fa-spin");
     setTimeout(function(){
         $('#loadicon').removeClass();
-        $('#loadicon').addClass("loadicon glyphicon glyphicon-alert");
-    },3000);
+        $('#loadicon').addClass("fa fa-exclamation-circle");
+    },10000);
 });
 
 //When ready

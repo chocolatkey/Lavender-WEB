@@ -1,9 +1,14 @@
 <?php
-define('__CC__', 1);//security
+define('__CC__', 1);// Security
 
 $version = "Pre-Alpha";
-//Master configuration file
-require_once(dirname(__FILE__)."/config.php");
+
+if(file_exists(dirname(__FILE__)."/config.php")) {
+    require_once(dirname(__FILE__)."/config.php"); //Master configuration file
+} else {
+    require_once(dirname(__FILE__)."/comp/install.php"); //Installation
+    die();
+}
 
 //Lanuage file
 require_once(dirname(__FILE__)."/lang/".$mconfig["lang"].".php");
@@ -15,7 +20,7 @@ require(dirname(__FILE__)."/comp/functions.php");
 $header = cleanstring($_SERVER['HTTP_USER_AGENT']); //TODO: Not sure if 100% injection-proof
 if($header == "0x1" | $header == "1x0" | $header == "1x1") {
 	require(dirname(__FILE__)."/comp/post.php");
-    die();//nothing more
+    die();// Nothing more
 }
 
 $admin = $mconfig["cc_admin"];//admin user
@@ -79,7 +84,8 @@ function appLogout(){
   // autologin for the same user. For demonstration purposes,
   // we don't do that here so that the autologin function remains
   // easy to test.
-  //$ulogin->SetAutologin($_SESSION['username'], false);
+  $ulogin = new uLogin('appLogin', 'appLoginFail');
+   $ulogin->SetAutologin($_SESSION['username'], false);
 
 	unset($_SESSION['uid']);
 	unset($_SESSION['username']);
@@ -138,7 +144,7 @@ if (isAppLoggedIn()){
             }
         }
 	} else if ($action=='chpass') {	// Change user password
-        if (($_SESSION['uid'] == $ulogin->Authenticate3($_SESSION['uid'], $_POST['opwd'])) || ($_SESSION['username']==$admin)) {// Admin power overrides need to know previous password
+        if (($_SESSION['uid'] == $ulogin->Authenticate3($_SESSION['uid'], $_POST['opwd']))) {// If old pass is right
             if ( !$ulogin->SetPassword($_SESSION['uid'], $_POST['npwd']) ) {
                 $msg = "<div class='alert alert-danger animated pulse' id='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["password_change_error"]."<   /div>";
             } else {
@@ -175,14 +181,14 @@ if (isAppLoggedIn()){
         } else {
             $msg = "<div class='alert alert-warning animated pulse' id='alert'><button type='button' class='close' data-dismiss='alert'>&times;</button>".$GLOBALS["lang"]["invalid_nounce"]."</div>";
         }
-    } else if ($action=='autologin'){	// We were requested to use the remember-me function for logging in.
+    } else /*if ($action=='autologin')*/{	// We were requested to use the remember-me function for logging in.
 		// Note, there is no username or password for autologin ('remember me')
 		$ulogin->Autologin();
-		if (!$ulogin->IsAuthSuccess())
-			$msg = "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button>Autologin failure</div>";
-		else
-			$msg = "<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button>Autologon ok</div>";
-
+		if (!$ulogin->IsAuthSuccess()){
+			//$msg = "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button>Autologin failure</div>";
+		} else {
+			//$msg = "<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button>Autologon ok</div>";
+        }
 	}
 }
 
@@ -198,6 +204,8 @@ header('Content-Type: text/html; charset=UTF-8');
 // want to avoid using this on a live website.
 //--ulLog::ShowDebugConsole();
 
+//TODO: query database for network IDs and...
+
 //Main Page content
 if(isset($_GET['q'])) {
 	$q=cleanstring($_GET['q']);
@@ -209,20 +217,43 @@ if (isAppLoggedIn()){
     require_once(dirname(__FILE__)."/comp/pages.php");
     if(!isset($pages[$q])){
         $username = $_SESSION['username'];
+        $pname = $lang["404"];
         require_once(dirname(__FILE__)."/comp/header.php");
         require_once(dirname(__FILE__)."/comp/nav.php");//navigation menu
-        echo("<h1 class='title noselect'>Page does not exist!</h1>");
+        echo("<h1 class='title noselect'>".$lang["404"]."</h1>");
     } else {
         $pname = $pages[$q];//set page title
         require(dirname(__FILE__)."/comp/main.php");
     }
 } else {
-    $pname = $lang['login'];//set page title
-	require_once(dirname(__FILE__)."/comp/header.php");
+    $waslegit = false;
+    $networks = $database->select("networks", [
+        "id",
+        "plugin"
+    ]);
+    print_r($networks);
+    foreach($networks as $network) {
+        if(isset($_GET[$network["id"]])){
+            require_once(dirname(__FILE__)."/comp/plugins/".$network["plugin"].".php"); //PLUGIN
+            if(xplugin()) {
+                die(0);
+            }
+        }
+    }
+    //print_r($_GET);
+    if(!$waslegit){//Login page
+        $pname = $lang['login'];//set page title
+        require_once(dirname(__FILE__)."/comp/header.php");
 ?>
 <script>
-	jQuery(document).ready(function(){
-		jQuery('.hasTooltip').tooltip({});
+	$(document).ready(function(){
+		$('.hasTooltip').tooltip({});
+        $("input").each(function( index ) {
+            if ($(this).is(":empty")) {
+                $(this).focus();
+                return false;
+            }
+        });
 	});
 </script>
 <style type="text/css">
@@ -234,36 +265,41 @@ if (isAppLoggedIn()){
 		height: inherit !important;
 		margin-bottom: 0px;
 	}
+    .checkbox label::after {
+        padding-left: 2px;
+        padding-top: 1px;
+        font-size: 14px;
+    }
 </style>
 <center>
 <div class="content sbox noselect animated bounceInDown">
-  <img src="./img/logo.png" alt="Lavender Logo" style="margin-bottom: 20px; height: 50px; width: auto;">
+  <?php if(!$mconfig["conceal"]){ ?><img src="./img/logo.png" alt="Lavender Logo" style="margin-bottom: 20px; height: 50px; width: auto;"><?php } ?>
   <?php echo ($msg);?>
   <div class="alert alert-danger animated tada" id="errdiv" style="display:none"><span id="errmsg"></span>
     <button type='button' class='close' data-dismiss='alert'>&times;</button>
   </div>
   <form action="" method="POST">
-    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+    <div class="input-group"><span class="input-group-addon"><i class="fa fa-user"></i></span>
       <input type="text" name="user" placeholder="<?php echo $lang["username"];?>" autocapitalize="off" class="input form-control" required>
     </div>
     <br>
-    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
+    <div class="input-group"><span class="input-group-addon"><i class="fa fa-key"></i></span>
       <input type="password" name="pwd" placeholder="<?php echo $lang["password"];?>" class="input form-control" required>
     </div>
     <br>
-    <input type="checkbox" name="autologin" id="al" value="1">
-    <label for="al"><?php echo $lang["remember_me"];?></label>
+    <div class="checkbox" style="margin-top: 0px;">
+        <input type="checkbox" name="autologin" id="al" value="1">
+        <label for="al"><?php echo $lang["remember_me_30_days"];?></label>
+    </div>
     <select name="action" style="display:none">
-      <option>login</option>
-      <option>autologin</option>
-      <option>create</option>
+        <option>login</option>
     </select>
     <input type="text" style="display:none" id="nonce" name="nonce" value="<?php echo ulNonce::Create('login');?>" required>
     <br>
-    <input type="submit" class="btn btn-gray btn-large" value="<?php echo $lang["login"];?>" style="width:150px; margin-top:20px;">
+    <input type="submit" class="btn btn-gray btn-large" value="<?php echo $lang["login"];?>" style="width:150px;">
   </form>
 </div>
-<div class="bottom noselect"><a style="float: left;" href="/">&copy; <?php echo $mconfig["branding"]; ?></a><a style="float: right; cursor: pointer;" href="https://github.com/chocolatkey/Lavender-WEB">Lavender Web</a></div>
-<?php } ?>
+<?php if(!$mconfig["conceal"]){ ?><div class="bottom noselect"><a style="float: left;" href="/">&copy; <?php echo $mconfig["branding"]; ?></a><a style="float: right; cursor: pointer;" href="https://github.com/chocolatkey/Lavender-WEB">Lavender Web</a></div><?php } ?>
+<?php }} ?>
 </body>
 </html>

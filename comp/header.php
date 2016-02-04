@@ -4,11 +4,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><?php echo $mconfig["branding"];?> - <?php echo $pname;?></title>
-<link rel="icon" href="/favicon.ico" type="image/ico"/>
+<title><?php if(!$mconfig["conceal"]){ echo $mconfig["branding"];?> - <?php } echo $pname;?></title>
+<?php if(!$mconfig["conceal"]){ ?><link rel="icon" href="/favicon.ico" type="image/ico"/><?php } ?>
 <link rel="stylesheet" href="./css/bootstrap.min.css">
-<script src="./js/jquery.min.js"></script>
-<script src="./js/bootstrap.min.js"></script>
+<link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+<?php if (isAppLoggedIn()){ //Scripts for backend & not necessary for login ?>
+<script type="text/javascript" src="./js/pwstrength-bootstrap-1.2.9.min.js"></script>
+<?php } ?>
 <link href="./css/sho.css" rel="stylesheet" type="text/css">
 <link href="./css/animate.min.css" rel="stylesheet" type="text/css">
 <script>

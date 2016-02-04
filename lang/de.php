@@ -1,6 +1,8 @@
 <?php
 /*German (de) language file for Lavender web*/
-defined('__CC__') or die('Restricted access'); $lang = [
+defined('__CC__') or die('Restricted access');
+include("en.php");
+$lang = [
  //Native language name
  'this' => 'Deutsch'
  

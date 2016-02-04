@@ -19,34 +19,34 @@ defined('__CC__') or die('Restricted access');
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="index.php#dashboard"><i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i> <?php echo $lang["dashboard"]; ?></a></li>
-        <li><a href="index.php?q=clients"><i class=" glyphicon glyphicon-knight" aria-hidden="true"></i> <?php echo $lang["clients"]; ?></a></li>
-        <li><a href="index.php?q=tasks"><i class="glyphicon glyphicon-time" aria-hidden="true"></i> <?php echo $lang["tasks"];?></a></li>
-        <li><a href="index.php?q=files"><i class="glyphicon glyphicon-folder-open" aria-hidden="true"></i> <?php echo $lang["files"];?></a></li>
+        <li><a href="index.php#dashboard"><i class="fa fa-tachometer"></i> <?php echo $lang["dashboard"]; ?></a></li>
+        <li><a href="index.php?q=clients"><i class="fa fa-users"></i> <?php echo $lang["clients"]; ?></a></li>
+        <li><a href="index.php?q=tasks"><i class="fa fa-clock-o"></i> <?php echo $lang["tasks"];?></a></li>
+        <li><a href="index.php?q=files"><i class="fa fa-folder-open"></i> <?php echo $lang["files"];?></a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon glyphicon-cog" aria-hidden="true"></i> System<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs"></i> System<span class="caret"></span></a>
           <ul class="dropdown-menu">
-          <li><a href="index.php?q=power"><i class="glyphicon glyphicon-off" aria-hidden="true"></i> <?php echo $lang["power"];?></a></li>
+          <li><a href="index.php?q=power"><i class="fa fa-power-off"></i> <?php echo $lang["power"];?></a></li>
             <?php if ($username==$admin){ //show more if admin ?><li role="separator" class="divider"></li>
-            <li><a href="index.php?q=settings"><i class="glyphicon glyphicon-globe" aria-hidden="true"></i> <?php echo $lang["global_settings"];?></a></li>
-            <li><a href="index.php?q=networks"><i class="glyphicon glyphicon-cloud" aria-hidden="true"></i> <?php echo $lang["manage_networks"];?></a></li>
-            <li><a href="index.php?q=info"><i class="glyphicon glyphicon-hdd" aria-hidden="true"></i> <?php echo $lang["server_info"];?></a></li>
-            <li role="separator" class="divider"></li><?php } ?>
-            <li><a href="index.php?q=about"><i class="glyphicon glyphicon-info-sign" aria-hidden="true"></i> <?php echo $lang["about"];?></a></li>
-            <li><a href="index.php?q=help"><i class="glyphicon glyphicon-question-sign" aria-hidden="true"></i> <?php echo $lang["help"];?></a></li>
+            <li><a href="index.php?q=settings"><i class="fa fa-globe"></i> <?php echo $lang["global_settings"];?></a></li>
+            <li><a href="index.php?q=networks"><i class="fa fa-cloud"></i> <?php echo $lang["manage_networks"];?></a></li>
+            <li><a href="index.php?q=info"><i class="fa fa-hdd-o"></i> <?php echo $lang["server_info"];?></a></li>
+            <?php } ?>
+            <li role="separator" class="divider"></li>
+            <li><a href="index.php?q=about"><i class="fa fa-info-circle"></i> <?php echo $lang["about"];?></a></li>
+            <li><a href="index.php?q=help"><i class="fa fa-question-circle"></i> <?php echo $lang["help"];?></a></li>
           </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon glyphicon-home" aria-hidden="true"></i> <?php echo($username); ?> <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-home"></i> <?php echo($username); ?> <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a data-toggle="modal" href="#myaccount" data-target="#myaccount"><i class="glyphicon glyphicon-user" aria-hidden="true"></i> <?php echo $lang["my_account"];?></a></li>
-            <?php if ($username==$admin){ //create if admin, delete if not ?><li style="cursor="pointer";"><a data-toggle="modal" href="#createuser" data-target="#createuser"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <?php echo $lang["create_account"];?></a></li><?php }else{ ?><li ><a ac="del" onClick="del()" ><i class="glyphicon glyphicon-trash" aria-hidden="true"></i> <?php echo $lang["delete_account"];?></a></li><?php } ?>
-            <li><a href="index.php?q=accounts"><i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i> <?php echo $lang["manage_accounts"];?></a></li>
+            <li><a data-toggle="modal" href="#myaccount" data-target="#myaccount"><i class="fa fa-user"></i> <?php echo $lang["my_account"];?></a></li>
+            <?php if ($username==$admin){ //manage if admin, delete if not ?><li><a href="index.php?q=accounts"><i class="fa fa-pencil-square-o"></i> <?php echo $lang["manage_accounts"];?></a></li><?php }else{ ?><li ><a ac="del" onClick="del()" ><i class="fa fa-user-times"></i> <?php echo $lang["delete_my_account"];?></a></li><?php } ?>
             <li role="separator" class="divider"></li>
-            <li><a onClick="form('refresh');" href="#"><i class="glyphicon glyphicon-repeat" aria-hidden="true"></i> <?php echo $lang["refresh_page"];?></a></li>
-            <li><a onClick="form('logout')" href="#"><i class="glyphicon glyphicon-log-out" aria-hidden="true"></i> <?php echo $lang["logout"];?></a></li>
+            <li><a onClick="form('refresh');" href="#"><i class="fa fa-refresh"></i> <?php echo $lang["refresh_page"];?></a></li>
+            <li><a onClick="form('logout')" href="#"><i class="fa fa-sign-out"></i> <?php echo $lang["logout"];?></a></li>
           </ul>
         </li>
       </ul>
@@ -79,19 +79,7 @@ defined('__CC__') or die('Restricted access');
         <br>
         <input type="password" name="npwd" id="pass" placeholder="<?php echo $lang["new_password"];?>" class="input-large form-control" required>
         <br>
-        <input type="password" name="cpwd" id="confirmpass" placeholder="<?php echo $lang["new_password_confirm"];?>" class="input-large form-control" required>
-        
-        <script>
-        $('#confirmpass, #pass').on('keyup', function () {
-            if ($(this).val() == $('#pass').val() && $(this).val() == $('#confirmpass').val()) {
-                $("#updatepass").prop("disabled",false);
-                $('#confirmpass').removeClass('has-error');
-            } else{
-                $("#updatepass").prop("disabled",true);
-                $('#confirmpass').addClass('has-error');
-            }
-        });
-        </script>
+        <input type="password" name="cpwd" id="confirmpass" style="margin-top: 10px;" placeholder="<?php echo $lang["new_password_confirm"];?>" class="input-large form-control" required>
       </div>
     <div class="modal-footer noselect">
       <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $lang["close"];?></button>
@@ -101,28 +89,49 @@ defined('__CC__') or die('Restricted access');
 </div>
 </div>
 </div>
-<?php if ($username==$admin){ ?>
-<!--User creation form-->
-<div aria-hidden="true" aria-labelledby="Create new User" class="modal fade" id="createuser" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo $lang["close"];?>"><span aria-hidden="true">&times;</span></button>
-    <h3 id="modal-title" class="noselect"><?php echo $lang["create_account"];?></h3>
-  </div>
-  <form method="POST">
-    <input type="hidden" name="action" value="create">
-    <div class="modal-body noselect" style="text-align:left">
-        <input type="text" name="user" placeholder="<?php echo $lang["username"];?>" class="input-large form-control" required>
-        <br>
-        <input type="password" name="pwd" placeholder="<?php echo $lang["password"];?>" class="input-large form-control" required>
-    </div>
-    <div class="modal-footer noselect">
-      <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $lang["cancel"];?></button>
-      <button class="btn btn-primary" type="submit"><?php echo $lang["create_user"];?></button>
-    </div>
-  </form>
-</div>
-</div>
-</div>
-<?php } ?>
+<!--Styles and scripts for account modal(s)-->
+<style>
+#myaccount .progress, #createuser .progress {
+    margin-bottom: 0px;
+    margin-top: 2px;
+}
+</style>
+<script>
+    $(document).ready(function(){
+        "use strict";
+        var options = {};
+        options.ui = {
+            verdicts: [
+                "<?php echo $lang["weak"];?>",
+                "<?php echo $lang["fair"];?>",
+                "<?php echo $lang["medium"];?>",
+                "<?php echo $lang["strong"];?>",
+                "<?php echo $lang["very_strong"];?>"
+            ]
+        };
+        options.rules = {
+            activated: {
+                wordTwoCharacterClasses: true,
+                wordRepetitions: true
+            }
+        };
+        $('#pass, #npass').pwstrength(options);
+        $('#confirmpass, #pass').on('keyup', function () {
+            if ($(this).val() == $('#pass').val() && $(this).val() == $('#confirmpass').val() && $(this).val().length > 0) {
+                $("#updatepass").prop("disabled",false);
+                $('#confirmpass, #pass').css('border-color', 'green');
+            } else{
+                $("#updatepass").prop("disabled",true);
+                $('#confirmpass, #pass').css('border-color', 'red');
+            }
+        });
+    });
+<?php if ($username!=$admin){ //create if admin, delete if not ?>
+//Delete account
+function del(){
+    if (confirm("<?php echo $lang["confirm_deleted_myaccount"];?>")){
+        document.getElementById('delete').submit();
+    }
+}<?php } ?>
+</script>
+

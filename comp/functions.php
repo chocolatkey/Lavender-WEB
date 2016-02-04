@@ -21,19 +21,19 @@ function nice_output($escapedString)
     $replacements[0] = '%';
     $replacements[1] = '_';
     $output = preg_replace($patterns, $replacements, $escapedString);
-    
+
     return $output;
 } 
 
 function cleanstring($string)
 {
-	$done = nice_output(nice_escape($string));
-	
-	return $done;
+    $done = nice_output(nice_escape($string));
+
+    return $done;
 }
 
 //database
-require(dirname(__FILE__)."/medoo.min.php");
+require(dirname(__FILE__)."/medoo.php");
 
 $database = new medoo([
 	// required

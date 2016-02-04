@@ -88,7 +88,7 @@ define('UL_LOGIN_DELAY', 2);
 define('UL_NONCE_EXPIRE', 900);
 
 // How many seconds should autologin be valid for a user.
-define('UL_AUTOLOGIN_EXPIRE', 5356800);
+define('UL_AUTOLOGIN_EXPIRE', 2592000);
 
 // Maximum username length. Any username longer than
 // this limit will be considered invalid user input.
